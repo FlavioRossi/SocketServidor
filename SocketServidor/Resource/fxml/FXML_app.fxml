@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane stylesheets="@../css/fxml_app.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXML_appController">
+   <center>
+      <StackPane alignment="TOP_LEFT" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="50.0" spacing="10.0" style="-fx-background-color: white;" StackPane.alignment="TOP_LEFT">
+               <children>
+                  <Label text="IP:" />
+                  <Label fx:id="lbl_ip" maxWidth="1.7976931348623157E308" text="192.168.1.106" HBox.hgrow="ALWAYS" />
+                  <Label text="Puerto:" />
+                  <JFXTextField fx:id="txt_puerto" />
+                  <JFXButton fx:id="btn_ejecutar" onAction="#ejecutarServer" text="Ejecutar" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <effect>
+                  <DropShadow height="10.0" radius="2.0" width="0.0" />
+               </effect>
+            </HBox>
+            <JFXTreeTableView fx:id="jfxTreeTableView_clientes">
+               <StackPane.margin>
+                  <Insets top="55.0" />
+               </StackPane.margin>
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </JFXTreeTableView>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,38 @@
+{
+    "FLAVIO":
+            {
+                "mensaje1": {
+                    "usuarioD": "ALE77",
+                    "nombreD": "MORALES, GUSTAVO ALEJANDRO",
+                    "mensaje": "Mensaje 1"
+                },
+                "mensaje2": {
+                    "usuarioD": "ALE77",
+                    "nombreD": "MORALES, GUSTAVO ALEJANDRO",
+                    "mensaje": "Mensaje 2"
+                },
+                "mensaje3": {
+                    "usuarioD": "FLAVIOR",
+                    "nombreD": "ROSSI, FLAVIO NICOLÁS",
+                    "mensaje": "Hola gentusa"
+                },
+                "mensaje4": {
+                    "usuarioD": "FRANCOR",
+                    "nombreD": "ROSSI, JUAN FRANCO",
+                    "mensaje": "Silvana, me dirijo a ud..."
+                }
+            },
+    "ALE77":
+            {
+                "mensaje1": {
+                    "usuarioD": "FLAVIO",
+                    "nombreD": "ROSSI, FLAVIO NICOLÁS",
+                    "mensaje": "Esta es la notificacion"
+                },
+                "mensaje2": {
+                    "usuarioD": "FLAVIO",
+                    "nombreD": "ROSSI, FLAVIO NICOLÁS",
+                    "mensaje": "Esta es la notificacion"
+                }
+            }
+}
