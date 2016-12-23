@@ -1,0 +1,54 @@
+{
+    "FLAVIO":
+            {
+                "__comment": "1 = CORREO INTERNO",
+                "1": {
+                    "1": {
+                        "usuarioD": "ALE77",
+                        "nombreD": "MORALES, GUSTAVO ALEJANDRO",
+                        "mensaje": "Mensaje 1"
+                    },
+                    "2": {
+                        "usuarioD": "ALE77",
+                        "nombreD": "MORALES, GUSTAVO ALEJANDRO",
+                        "mensaje": "Mensaje 2"
+                    },
+                    "3": {
+                        "usuarioD": "FLAVIOR",
+                        "nombreD": "ROSSI, FLAVIO NICOLÁS",
+                        "mensaje": "Hola gentusa"
+                    },
+                    "4": {
+                        "usuarioD": "FRANCOR",
+                        "nombreD": "ROSSI, JUAN FRANCO",
+                        "mensaje": "Silvana, me dirijo a ud..."
+                    }
+                }
+            },
+    "ALE77":
+            {
+                "__comment": "1 = CORREO INTERNO",
+                "1": {
+                    "1": {
+                        "usuarioD": "ALE77",
+                        "nombreD": "MORALES, GUSTAVO ALEJANDRO",
+                        "mensaje": "Mensaje 1"
+                    },
+                    "2": {
+                        "usuarioD": "ALE77",
+                        "nombreD": "MORALES, GUSTAVO ALEJANDRO",
+                        "mensaje": "Mensaje 2"
+                    },
+                    "3": {
+                        "usuarioD": "FLAVIOR",
+                        "nombreD": "ROSSI, FLAVIO NICOLÁS",
+                        "mensaje": "Hola gentusa"
+                    },
+                    "4": {
+                        "usuarioD": "FRANCOR",
+                        "nombreD": "ROSSI, JUAN FRANCO",
+                        "mensaje": "Silvana, me dirijo a ud..."
+                    }
+                }
+            }
+}
