@@ -5,7 +5,6 @@
  */
 package modelo;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.time.LocalDateTime;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
