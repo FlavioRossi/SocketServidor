@@ -48,28 +48,34 @@ public class ClienteRespuestas extends Task{
                 
             case 1:
                 //logueo usuario
-                String nombre = (String) resul.get("usuario");
-                String clave = (String) resul.get("clave");
-                
-                JSONObject respond = new JSONObject();
-                if (nombre.equals("FLAVIO") && clave.equals("FNR")) {
-                    cliente.setNombre(nombre);
-                    cliente.setClave(clave);
-                    cliente.setIngreso(LocalDateTime.now());
-                    CLIENTES.addCliente(cliente);
-                    
-                    respond.put("logueo", "ok");
-                    respond.put("id", cliente.getId());
-                    respond.put("nombre", cliente.getNombre());
-                    respond.put("ingreso", cliente.getIngreso().format(Status.FORMATO_FECHA_HORA));
-                }else{
-                    respond.put("logueo", "cancel");
-                }
-                cliente.enviar(1, respond);
+                registroCliente(resul);
                 break;
             case 2:
                 //envia notificaciones
                 break;
         }
     }
+    
+    private void registroCliente(JSONObject resul){
+        String nombre = (String) resul.get("usuario");
+        String clave = (String) resul.get("clave");
+
+        JSONObject respond = new JSONObject();
+        if ((nombre.equals("FLAVIO") && clave.equals("FNR")) || (nombre.equals("FRANCOR") && clave.equals("JFR"))) {
+            cliente.setNombre(nombre);
+            cliente.setClave(clave);
+            cliente.setIngreso(LocalDateTime.now());
+            CLIENTES.addCliente(cliente);
+
+            respond.put("logueo", "ok");
+            respond.put("id", cliente.getId());
+            respond.put("nombre", cliente.getNombre());
+            respond.put("ingreso", cliente.getIngreso().format(Status.FORMATO_FECHA_HORA));
+        }else{
+            respond.put("logueo", "cancel");
+        }
+        cliente.enviar(1, respond);
+    }
+    
+    
 }
