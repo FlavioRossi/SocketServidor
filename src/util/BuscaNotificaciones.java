@@ -41,12 +41,8 @@ public class BuscaNotificaciones extends Task {
     
     @Override
     protected Object call() throws Exception {
-        int cont = 0;
         while (true) {
             marcar = new ArrayList<>();
-            
-            cont++;
-            System.out.println(cont);
             
             File file = Cobol.buscaNotificaciones();
             if (file != null) {

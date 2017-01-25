@@ -44,8 +44,11 @@ public class ClienteRespuestas extends Task{
         
         switch(valor){
             case 0:
-                //pulso de vida (verifica conexion de socket)
-                
+                /**
+                 * pulso de vida (verifica conexion de socket)
+                 * no devuelve valores ya que el error lo toma el cliente 
+                 * cuando solicita el pulso de vida
+                 */
             case 1:
                 //logueo usuario
                 registroCliente(resul);
