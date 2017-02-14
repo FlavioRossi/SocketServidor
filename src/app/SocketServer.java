@@ -7,6 +7,8 @@ package app;
 
 import controlador.FXML_appController;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,8 +35,13 @@ public class SocketServer extends Application {
         stage.show();
         
         stage.setOnCloseRequest((WindowEvent event) -> {
-            servidor.getServidor().stopServer();
-            System.exit(0);
+            try {
+                servidor.getServidor().stopServer();
+                System.exit(0);
+            } catch (InterruptedException ex) {
+                System.out.println("Error al detener servidor");
+                Logger.getLogger(SocketServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 

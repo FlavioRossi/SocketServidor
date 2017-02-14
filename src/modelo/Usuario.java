@@ -8,6 +8,7 @@ package modelo;
 import java.time.LocalDateTime;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +24,8 @@ public class Usuario{
     private final StringProperty clave;
     private LocalDateTime ingreso;
     private LocalDateTime salida;
+    
+    private final BooleanProperty estado;
     private final BooleanProperty notificaciones;
     
     public Usuario(int id) {
@@ -30,6 +33,7 @@ public class Usuario{
         nombre = new SimpleStringProperty();
         clave = new SimpleStringProperty();
         notificaciones = new SimpleBooleanProperty(true);
+        estado = new SimpleBooleanProperty(false);
     }
 
     public int getId() {
@@ -74,6 +78,14 @@ public class Usuario{
 
     public void setNotificaciones(boolean notificaciones) {
         this.notificaciones.set(notificaciones);
+    }
+
+    public ReadOnlyBooleanProperty getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado.set(estado);
     }
     
     

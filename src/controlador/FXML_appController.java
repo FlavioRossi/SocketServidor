@@ -32,7 +32,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import modelo.Cliente;
-import modelo.Servidor;
+import conexion.Servidor;
 import util.ListaClientes;
 import util.Status;
 
@@ -42,10 +42,6 @@ import util.Status;
  * @author FLAVIO
  */
 public class FXML_appController implements Initializable {
-
-    /**
-     * Instancia que abre el puerto del servidor
-     */
     private Servidor servidor;
 
     @FXML
@@ -57,25 +53,14 @@ public class FXML_appController implements Initializable {
     @FXML
     private JFXButton btn_ejecutar;
 
-    /**
-     * Devuelve instancia del servidor
-     *
-     * @return
-     */
     public Servidor getServidor() {
         return servidor;
     }
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            servidor = new Servidor();
+            servidor = new Servidor(Status.PUERTO_SOCKET);
 
             JFXTreeTableColumn<AdapterClientes, Number> column_id = new JFXTreeTableColumn<>("ID");
             column_id.setPrefWidth(50);
@@ -145,18 +130,20 @@ public class FXML_appController implements Initializable {
 
     @FXML
     private void ejecutarServer(ActionEvent event) throws IOException {
-        if (servidor.isRunning()) {
+        if (!servidor.getESTADO_SERVERProperty().get()) {
             servidor.startServer();
             btn_ejecutar.setText("Conectado");
         } else {
-            servidor.stopServer();
-            btn_ejecutar.setText("Conectar");
+            try {
+                servidor.stopServer();
+                btn_ejecutar.setText("Conectar");
+            } catch (InterruptedException ex) {
+                System.out.println("Error al detener servidor");
+                Logger.getLogger(FXML_appController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
-    /**
-     * Clase adapter para tabla de usuarios conectados
-     */
     private class AdapterClientes extends RecursiveTreeObject<AdapterClientes> {
 
         private final IntegerProperty id;

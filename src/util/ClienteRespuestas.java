@@ -30,12 +30,18 @@ public class ClienteRespuestas extends Task{
 
     @Override
     protected Object call() throws Exception {
-        while(true){
+        boolean socketActivo = true;
+        
+        while(socketActivo){
             String mensaje = input.readUTF();
             JSONObject respond = (JSONObject) new JSONParser().parse(mensaje);
             System.out.println("Llego del cliente " + mensaje);
+            
+            int valor = Integer.parseInt(respond.get("parametro").toString());
+            if (valor == 9999) socketActivo = false;
             responder(respond);
         }
+        return null;
     }
     
     public void responder(JSONObject json){
@@ -49,6 +55,7 @@ public class ClienteRespuestas extends Task{
                  * no devuelve valores ya que el error lo toma el cliente 
                  * cuando solicita el pulso de vida
                  */
+                break;
             case 1:
                 //logueo usuario
                 registroCliente(resul);
@@ -56,6 +63,12 @@ public class ClienteRespuestas extends Task{
             case 2:
                 //envia notificaciones
                 break;
+            case 9999:
+                //cierra socket
+                JSONObject respond = new JSONObject();
+                cliente.enviar(9999, respond);
+                ListaClientes.getInstancia().removeCliente(cliente);
+                cliente.stopCliente();
         }
     }
     
@@ -64,10 +77,12 @@ public class ClienteRespuestas extends Task{
         String clave = (String) resul.get("clave");
 
         JSONObject respond = new JSONObject();
-        if ((nombre.equals("FLAVIO") && clave.equals("FNR")) || (nombre.equals("FRANCOR") && clave.equals("JFR"))) {
+        if ((nombre.equals("FLAVIO") && clave.equals("FNR")) || (nombre.equals("FRANCOR") && clave.equals("JFR"))
+                || (nombre.equals("ALE77") && clave.equals("LI77"))) {
             cliente.setNombre(nombre);
             cliente.setClave(clave);
             cliente.setIngreso(LocalDateTime.now());
+            cliente.setEstado(true);
             CLIENTES.addCliente(cliente);
 
             respond.put("logueo", "ok");
