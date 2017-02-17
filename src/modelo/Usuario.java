@@ -34,6 +34,9 @@ public class Usuario{
         clave = new SimpleStringProperty();
         notificaciones = new SimpleBooleanProperty(true);
         estado = new SimpleBooleanProperty(false);
+        ingreso = LocalDateTime.now();
+        salida = LocalDateTime.now();
+        
     }
 
     public int getId() {

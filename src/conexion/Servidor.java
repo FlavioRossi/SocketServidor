@@ -6,6 +6,7 @@
 package conexion;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -21,18 +22,18 @@ import modelo.Cliente;
 public class Servidor {
     private static final Logger LOG = Logger.getLogger(Servidor.class.getName());
    
+    private final ServerSocket SERVER_SOCKET;
     private final BooleanProperty ESTADO_SERVER;
     private final ObservableList<Cliente> CLIENTES;
    
-    private final Thread T_RECIBE_CLIENTES;
-    
+    private Thread tRecibeClientes;
     private Thread tBuscaNotificaciones;
     
     public Servidor(int puerto) throws IOException {
         ESTADO_SERVER = new SimpleBooleanProperty(false);
         CLIENTES = FXCollections.observableArrayList();
-        
-        T_RECIBE_CLIENTES = new Thread(new RRecibeClientes(CLIENTES, puerto));
+        SERVER_SOCKET = new ServerSocket(puerto);
+        SERVER_SOCKET.setSoTimeout(1000);
     }
 
     public ReadOnlyBooleanProperty getESTADO_SERVERProperty() {
@@ -40,21 +41,23 @@ public class Servidor {
     }
     
     public ObservableList<Cliente> getCLIENTES() {
-        return FXCollections.unmodifiableObservableList(CLIENTES);
+        return CLIENTES;
     }
     
     public void startServer() throws IOException{
-        tBuscaNotificaciones = new Thread(new RBuscaNotificaciones(CLIENTES));
+        tRecibeClientes = new Thread(new RRecibeClientes(CLIENTES, SERVER_SOCKET));
+        tRecibeClientes.start();
         
-        T_RECIBE_CLIENTES.start();
+        tBuscaNotificaciones = new Thread(new RBuscaNotificaciones(CLIENTES));
         tBuscaNotificaciones.start();
         
         ESTADO_SERVER.set(true);
     }
     
     public void stopServer() throws InterruptedException{
-        T_RECIBE_CLIENTES.interrupt();
-        T_RECIBE_CLIENTES.join();
+        tRecibeClientes.interrupt();
+        tRecibeClientes.join();
+        
         tBuscaNotificaciones.interrupt();
         tBuscaNotificaciones.join();
         

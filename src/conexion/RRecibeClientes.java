@@ -8,7 +8,6 @@ package conexion;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketTimeoutException;
-import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
@@ -25,10 +24,9 @@ public class RRecibeClientes implements Runnable {
     private final ServerSocket SERVER_SOCKET;
     private final ObservableList<Cliente> CLIENTES;
     
-    public RRecibeClientes(ObservableList<Cliente> clientes, int puerto) throws IOException {
+    public RRecibeClientes(ObservableList<Cliente> clientes, ServerSocket serverSocket) throws IOException {
+        SERVER_SOCKET = serverSocket;
         CLIENTES = clientes;
-        SERVER_SOCKET = new ServerSocket(puerto);
-        SERVER_SOCKET.setSoTimeout(1000);
     }
 
     @Override

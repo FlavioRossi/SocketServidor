@@ -33,7 +33,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import modelo.Cliente;
 import conexion.Servidor;
-import util.ListaClientes;
 import util.Status;
 
 /**
@@ -61,7 +60,7 @@ public class FXML_appController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             servidor = new Servidor(Status.PUERTO_SOCKET);
-
+                    
             JFXTreeTableColumn<AdapterClientes, Number> column_id = new JFXTreeTableColumn<>("ID");
             column_id.setPrefWidth(50);
             column_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<AdapterClientes, Number> param) -> 
@@ -94,8 +93,7 @@ public class FXML_appController implements Initializable {
             
             ObservableList<AdapterClientes> adapterClientes = FXCollections.observableArrayList();
             
-            ListaClientes clientes = ListaClientes.getInstancia();
-            clientes.getClientes().addListener((ListChangeListener.Change<? extends Cliente> c) -> {
+            servidor.getCLIENTES().addListener((ListChangeListener.Change<? extends Cliente> c) -> {
                 while(c.next()){
                     if (c.wasAdded()) {
                         for (Cliente cliente : c.getAddedSubList()) {

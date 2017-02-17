@@ -20,12 +20,10 @@ import org.json.simple.parser.JSONParser;
 public class ClienteRespuestas extends Task{
     private final Cliente cliente;
     private final DataInputStream input;
-    private final ListaClientes CLIENTES;
     
     public ClienteRespuestas(Cliente cliente, DataInputStream input) {
         this.cliente = cliente;
         this.input = input;
-        CLIENTES = ListaClientes.getInstancia();
     }
 
     @Override
@@ -83,7 +81,6 @@ public class ClienteRespuestas extends Task{
             cliente.setClave(clave);
             cliente.setIngreso(LocalDateTime.now());
             cliente.setEstado(true);
-            CLIENTES.addCliente(cliente);
 
             respond.put("logueo", "ok");
             respond.put("id", cliente.getId());
@@ -91,6 +88,7 @@ public class ClienteRespuestas extends Task{
             respond.put("ingreso", cliente.getIngreso().format(Status.FORMATO_FECHA_HORA));
         }else{
             respond.put("logueo", "cancel");
+            cliente.setEstado(false);
         }
         cliente.enviar(1, respond);
     }
